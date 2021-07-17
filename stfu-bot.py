@@ -1,7 +1,8 @@
 import discord
 import random
 from discord.ext import commands
-import tokenfile
+import os
+from keep_alive import keep_alive
 
 bot = commands.Bot(command_prefix='.')
 
@@ -48,4 +49,5 @@ async def whoasked(ctx, *, arg):
         elif messages[-1] == msg and sent_once == False: 
             await ctx.send("No one asked kid. now stfu", file=discord.File(random.choice(whoasked_gifs)))
 
-bot.run(tokenfile.token)
+keep_alive()
+bot.run(os.environ.get("TOKEN"))
