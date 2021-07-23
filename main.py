@@ -4,8 +4,9 @@ from discord.ext import commands
 import os
 from keep_alive import keep_alive
 
-bot = commands.Bot(command_prefix='.')
-
+intents = discord.Intents.default()
+intents.members = True
+bot = commands.Bot(command_prefix='.', intents=intents)
 
 @bot.event
 async def on_ready():
@@ -58,23 +59,23 @@ async def whoasked(ctx, *, arg=None):
 
 @bot.command()
 async def naowalplease(ctx):
-    author = str(ctx.message.author)
-    if author == "bigBrain++#6969":
+    author = str(ctx.message.author.name)
+    if author == "bigBrain++;":
         await ctx.send("Naowal please")
-    elif author == "Feitan#0023":
+    elif author == "Feitan":
         await ctx.send("Zaryab please")
-    elif author == "Toast##3274":
+    elif author == "Toast":
         await ctx.send("Jing Nang please") 
-    elif author == "anaturalinstinctnoise#1919":
+    elif author == "anaturalinstinctnoise":
         await ctx.send("Areeb please") 
-    elif author == "Lilhomie##4235": 
+    elif author == "Lilhomie": 
         await ctx.send("Faidh please")
-    elif author == "inooby333#9496":
+    elif author == "inooby333":
         await ctx.send("Eric please") 
-    elif author == "ChocoFudge#8015":
+    elif author == "ChocoFudge":
         await ctx.send("Quazi please") 
     else:
-        await ctx.send(f"{ctx.message.author.name} please")
-
+        await ctx.send("{0} please".format(ctx.message.author.name))
+        
 keep_alive()
 bot.run(os.environ.get("TOKEN"))
