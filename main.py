@@ -22,14 +22,14 @@ async def stfu(ctx):
 async def racistmeter(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.message.author.name
-    await ctx.send("{0} is {1}% racist".format(member.name, random.choice(range(0, 100))))
+    await ctx.send("{0} is {1}% racist".format(member, random.choice(range(0, 100))))
 
 
 @bot.command(aliases=['cm'])
 async def clownmeter(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.message.author.name
-    await ctx.send("{0} is {1}% clown".format(member.name, random.choice(range(0, 100))))
+    await ctx.send("{0} is {1}% clown".format(member, random.choice(range(0, 100))))
 
 
 @bot.command(aliases=['wa'])
