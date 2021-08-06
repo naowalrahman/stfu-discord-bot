@@ -13,26 +13,32 @@ async def on_ready():
     print('Logged in as {0.user}'.format(bot))
 
 
-@bot.command()
+@bot.command(aliases=['hp'], help="displays a help image with detailed syntax description") 
+async def h(ctx, arg = None):
+    if arg == None: 
+        await ctx.send(file=discord.File(r'./help-img.png'))
+
+
+@bot.command(help="just says stfu")
 async def stfu(ctx):
     await ctx.send("stfu kid")
 
 
-@bot.command(aliases=['rm'])
+@bot.command(aliases=['rm'], help="tells you what percent racist you are")
 async def racistmeter(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.message.author.name
     await ctx.send("{0} is {1}% racist".format(member, random.choice(range(0, 100))))
 
 
-@bot.command(aliases=['cm'])
+@bot.command(aliases=['cm'], help="tells you what percent clown you are")
 async def clownmeter(ctx, member: discord.Member = None):
     if member is None:
         member = ctx.message.author.name
     await ctx.send("{0} is {1}% clown".format(member, random.choice(range(0, 100))))
 
 
-@bot.command(aliases=['wa'])
+@bot.command(aliases=['wa'], help="sees if anyone actually asked (takes a string as parameter)")
 async def whoasked(ctx, *, arg=None):
     if arg == None:
         await ctx.send("who asked what dumbass")
@@ -47,7 +53,7 @@ async def whoasked(ctx, *, arg=None):
                      r'./who-asked-gifs/whoasked3.gif', r'./who-asked-gifs/whoasked4.gif', r'./who-asked-gifs/whoasked5.jpg']
 
     for msg in messages:
-        if arg in msg.content and "?" in msg.content:
+        if arg in msg.content:
             embed = discord.Embed()
             embed.description = "Someone may have asked [here]({0}).".format(
                 msg.jump_url)
@@ -57,7 +63,7 @@ async def whoasked(ctx, *, arg=None):
             await ctx.send("No one asked kid. now stfu", file=discord.File(random.choice(whoasked_gifs)))
 
 
-@bot.command()
+@bot.command(help="says user please, with the user being the arg given")
 async def naowalplease(ctx):
     author = str(ctx.message.author.name)
     if author == "bigBrain++;":
