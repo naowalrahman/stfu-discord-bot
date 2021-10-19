@@ -49,11 +49,11 @@ async def whoasked(ctx, *, arg=None):
     messages = await ctx.channel.history(limit=15).flatten()
     sent_once = False
 
-    whoasked_gifs = [r'./who-asked-gifs/whoasked1.gif', r'./who-asked-gifs/whoasked2.gif',
-                     r'./who-asked-gifs/whoasked3.gif', r'./who-asked-gifs/whoasked4.gif', r'./who-asked-gifs/whoasked5.jpg']
+    whoasked_gifs = [r'./who-asked-gifs/whoasked1.gif', 
+                    r'./who-asked-gifs/whoasked2.gif', r'./who-asked-gifs/whoasked3.gif', r'./who-asked-gifs/whoasked4.gif', r'./who-asked-gifs/whoasked5.jpg']
 
     for msg in messages:
-        if arg in msg.content:
+        if arg in msg.content and messages[-1] != msg:
             embed = discord.Embed()
             embed.description = "Someone may have asked [here]({0}).".format(
                 msg.jump_url)
