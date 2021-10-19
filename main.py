@@ -45,22 +45,25 @@ async def whoasked(ctx, *, arg=None):
 
     channel_id = ctx.message.channel.id
     channel = bot.get_channel(channel_id)
+    sent_once = False
 
     messages = await ctx.channel.history(limit=15).flatten()
-    sent_once = False
+    del messages[0]
 
     whoasked_gifs = [r'./who-asked-gifs/whoasked1.gif', 
                     r'./who-asked-gifs/whoasked2.gif', r'./who-asked-gifs/whoasked3.gif', r'./who-asked-gifs/whoasked4.gif', r'./who-asked-gifs/whoasked5.jpg']
 
     for msg in messages:
-        if arg in msg.content and messages[-1] != msg:
+        if arg in msg.content:
+            sent_once = True
             embed = discord.Embed()
             embed.description = "Someone may have asked [here]({0}).".format(
                 msg.jump_url)
             await ctx.send(embed=embed)
-            sent_once = True
-        elif messages[-1] == msg and sent_once == False:
+        elif sent_once == False:
             await ctx.send("No one asked kid. now stfu", file=discord.File(random.choice(whoasked_gifs)))
+            sent_once = True
+    sent_once = False       
 
 
 @bot.command(help="says user please, with the user being the arg given")
