@@ -60,9 +60,10 @@ async def whoasked(ctx, *, arg=None):
             embed.description = "Someone may have asked [here]({0}).".format(
                 msg.jump_url)
             await ctx.send(embed=embed)
-        elif sent_once == False:
-            await ctx.send("No one asked kid. now stfu", file=discord.File(random.choice(whoasked_gifs)))
-            sent_once = True
+    
+    if sent_once == False:
+        await ctx.send("No one asked kid. now stfu", file=discord.File(random.choice(whoasked_gifs)))
+        sent_once = True
     sent_once = False       
 
 
